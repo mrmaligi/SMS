@@ -1,0 +1,1162 @@
+
+================= PAGE 1 =================
+2025
+
+
+================= PAGE 2 =================
+[No text extracted from this page]
+
+================= PAGE 3 =================
+Labkey Next Models
+LabKey Mini Models
+LabKey Glass Models
+LabKey  Extreme odels
+LabKey Control Units
+LabKey Software
+Security 
+API Integrations
+NFC Keys & Accessories
+Index
+................................................................................................................................................................................................................................... 06
+.................................................................................................................................................................................................................................. 12
+................................................................................................................................................................................................................................ 18
+............................................................................................................................................................................................................................ 25
+............................................................................................................................................................................................................................... 28
+......................................................................................................................................................................................................................................................Kit LabKey 38
+........................................................................................................................................................................................................................................ 43
+....................................................................................................................................................................................................................LabKey T echnical Features 40
+............................................................................................................................................................................................................................................ 51
+.............................................................................................................................................................................................................................................................. 52
+......................................................................................................................................................................................................................... 53
+......................................................................................................................................................................................................................................................Partnership 54
+
+================= PAGE 4 =================
+Made in Italy
+About us
+Twenty years of experience with cloud systems 
+and automation technologies has resulted in 
+LabKey: an integrated and modern access control 
+management system.
+A Made in Italy product sold worldwide
+
+
+================= PAGE 5 =================
+LabKey is the revolutionary gate 
+access management system that 
+can be installed on gates, 
+barriers, garages, gates and any 
+electronic device by exploiting 
+existing housings without 
+invasive intervention.  
+Cases of use
+WAREHOUSES ACCOMMODATION FACILITIES SPORTS CENTRES FAIRS
+PRIVATE YARDS OFFICES PARKING
+
+================= PAGE 6 =================
+12 backlit press buttons with 
+visual feedback.
+Proximity communication 
+technology.
+Keypad  
+NFC Reader
+ 6
+
+================= PAGE 7 =================
+The secure choice for access control without compromises
+The compact reader which communicates with the user through its front LEDs. 
+The exchanged information ensures high security thanks to the RS485 protocol. 
+It is compatible with the 503 ﬂush-mounted box and suitable for indoor environments with 
+great elegance as well as for outdoor’s. 
+LabKey Next
+NFC 
+Reader
+Keypad QR Code
+Reader
+ LK-NX-T
+LK-NX-TS
+LK-NX-Q
+LK-NX-TN
+LK-NX-N
+Visual
+Feedback 
+COMMAND DEVICES
+7LabKey Next
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed100x100x27mm
+Dimensions
+Light point
+Visual Feedback 
+Compatible
+503 box
+
+================= PAGE 8 =================
+Qr Code Reader
+LK-NX-Q
+QR code reading, even from smartphones
+The QR Code reader implements a higher level of security thanks to 
+the encryption used by the software. It works 100% in the dark and can 
+be installed both in outdoor and indoor environments.
+Maximum-level securityReading time
+0,3 sec. encrypted codes
+It detects the code up to
+25x25mm
+Guaranteed reading in
+complete darkness
+ smartphone
+Code reading from a Print code on
+paper
+ 8
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed100x100x27mm
+Dimensions
+Light point
+Visual Feedback 
+Compatible
+503 box
+
+================= PAGE 9 =================
+Customisable physical tags, light point and visual feedback
+Bracelets Cards Keychain
+NFC tags
+Option to
+Reading Time
+0,1 sec
+Customise
+3 cm
+Reading distance
+Compatible with cards
+MIFARE Classic 1K
+NFC stickers
+ .. and much more
+NFC Reader
+LK-NX-N
+The modern and efﬁcient solution for secure and intuitive access through 
+custom badges or gadgets.
+LabKey Next 9
+COMMAND DEVICES
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed100x100x27mm
+Dimensions
+Light point
+Visual Feedback 
+Compatible
+503 box
+
+================= PAGE 10 =================
+NFC Pocket Reader
+The future of Sustainable Hospitality!
+Remote utility management,
+even time-based
+The efﬁcient system for managing electrical utilities in hospitality 
+establishments such as hotels and resorts. This NFC device with an 
+integrated badge holder connects to a central unit and allows for the 
+activation of lights, air conditioning, and other electronic devices. 
+Management is carried out through the online panel, offering signiﬁcant 
+energy saving and enhancing guest safety.
+LK-NX-TS
+S
+h
+a
+l
+l
+ 
+w
+e
+ 
+ 
+g
+o
+?
+ 10
+Stand-by mode
+Energy saving
+RS-485
+Communication
+100x100x27mm
+Dimensions
+Light point
+Visual Feedback 
+Compatible
+503 box
+
+================= PAGE 11 =================
+[No text extracted from this page]
+
+================= PAGE 12 =================
+For maximum security.
+Qr Code Reader
+12 backlit press buttons with 
+visual feedback.
+Proximity communication 
+technology.
+Keypad
+NFC Reader
+12
+
+================= PAGE 13 =================
+The power of technology in a compact design
+LabKey Mini is the smallest of the press-button readers, with ultra-compact 
+dimensions of only 72 x 72 x 25 mm, making this model revolutionary. Its durability 
+and ease of use allow for installation in both modern settings and existing 
+structures.
+LabKey Mini
+QR Code
+ReaderKeypad NFC 
+Reader
+Radio
+Keypad
+ LK-MI-T
+LK-MI-R
+LK-MI-TQN
+LK-MI-TQ
+LK-MI-TN
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+Visual 
+Feedback
+I COMANDI
+LabKey Mini 13
+CONTROL DEVICES
+COMMAND DEVICES
+
+================= PAGE 14 =================
+Reading time
+0,1 sec.< 40 mW
+Consumption
+Opening of the gate via
+customisable
+Keypad and NFC Reader
+This control device combines the capabilities of a custom code keypad with 
+NFC Mifare Classic 1K tag reading. Thanks to its backlighting and side LEDs, 
+it becomes an elegant and unobtrusive light point.
+12 backlit buttons and NFC tag reading
+LK-MI-TN
+14
+NFC tags
+Option to
+Customise
+numerical codes
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 15 =================
+Keypad and QR Code Reader
+No-compromise reading in any lighting condition
+It is possible to use the backlit buttons for entering a numerical code or to 
+read a QR Code generated by the cloud panel or the Stand Alone 
+management interface. This method provides an unprecedented level of 
+security thanks to the use of state-of-the-art encryption.  
+< 40 mW
+LK-MI-TQ
+Reading time
+0,1 sec.
+It detects the code up to
+10x10mm
+smartphone
+Code reading from a Print code on
+paper
+I COMANDI
+LabKey Mini 15
+Consumption
+Opening of the gate via
+customisable
+numerical codes
+COMMAND DEVICES
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 16 =================
+Radio Keypad
+Connect the control device to the central unit without the use of cables. 
+The battery has a lifespan of over 2 years, and the open ﬁeld coverage range 
+exceeds 50 meters. Codes can be managed in both the Stand Alone and 
+cloud versions directly from the management panel.
+Autonomy
+2-3 years
+Wireless connectivity freedom
+Battery type
+CR-2450 
+BATTERY
+Radio frequency
+433,92 MHz
+Distance from the control unit
+50 m
+LK-MI-R
+16
+Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+ Compatible with
+Recessed glass
+
+================= PAGE 17 =================
+[No text extracted from this page]
+
+================= PAGE 18 =================
+For maximum security. 
+Qr Code Reader
+12 backlit buttons with 
+visual feedback.
+T ouchscreen Keypad
+NFC Reader
+18
+Proximity communication 
+technology.
+
+================= PAGE 19 =================
+The elegance of access control.
+LabKey Glass is a tempered glass reader with a 12-button backlit alphanumeric 
+touchscreen keypad. The multiple combinations offer traditional functionality 
+combined with modern QR code readings designed to enhance security.
+LabKey Glass
+QR Code
+Reader
+Keypad NFC 
+Reader
+ LK-GL -T
+LK-GL -NQ
+LK-GL -TQ
+LK-GL -TN
+LK-GL -N
+LK-GL -TQN
+Visual 
+Feedback
+LabKey Glass 19
+COMMAND DEVICES
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 20 =================
+LK-GL-NQ
+NFC reader and Qr Code reader
+A backlit tempered glass control device integrated with an NFC reader and 
+QR Code scanner. It comes with ﬁve cards, and QR codes can be managed 
+from both the cloud panel and the Stand Alone management interface.
+Elegant design for prestigious and unique spaces
+Compatible with cards
+MIFARE Classic 1K
+20
+Reading time
+0,1 sec.
+It detects the code up to
+10x10mm
+smartphone
+Code reading from a Print code on
+paper
+Opening of the gate via
+customisable
+numerical codes
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 21 =================
+Keypad and NFC Reader
+12 backlit touch buttons and NFC tag reading
+LK-GL-TN
+This control device combines the capabilities of a custom code keypad with 
+the reading of NFC Mifare Classic 1K tags. The tempered glass and the 
+luminous feedback communicating with the user, enhance the environment,
+by  creating a light point as well.
+Reading time
+0,1 sec.< 40 mW
+Consumption
+LabKey Glass 21
+COMMAND DEVICES
+Opening of the gate via
+customisable
+NFC tags
+Option to
+Customise
+numerical codes
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 22 =================
+25 cm
+Keypad, NFC and Qr Code Reader
+Where style meets innovation
+LK-GL-TQN
+Capture the elegance with our sophisticated tempered glass access control 
+reader, a harmonious fusion of advanced technology. Leverage NFC the and 
+the numeric keypad along with the high-performance QR Code scanner.
+WORKS 100% IN THE DARK
+Night
+Auto night shift
+Day
+OFF ON
+2 cm
+22
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 23 =================
+A fusion between elegance and practicality.
+LK-GL-TQN-503
+The access control reader that combines advanced features with a reﬁned design.
+With dimensions of 12.5cm x 9.5cm and a projection from the wall of only 8mm,
+This device integrates elegantly into any environment.
+Its compatibility with the 503 ﬂush-mounted box makes it
+the ideal choice for an elegant and minimally invasive installation.
+LabKey Glass 23
+Recessed keypad, QR code,
+NFC 503
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed72x72x25mm
+Dimensions
+Light point
+Visual feedback
+< 40 mW
+Reading time
+0,1 sec.
+It detects the code up to
+10x10mm
+smartphone
+Code reading from a Print code on
+paper
+Consumption
+Opening of the gate via
+customisable
+numerical codes
+Compatible
+503 box
+COMMAND DEVICES
+
+================= PAGE 24 =================
+24
+
+================= PAGE 25 =================
+12 backlit push buttons
+with visual feedback
+Keypad
+A high-performance player that 
+handles up to 30 steps per minute
+QR code reader
+LabKey Extreme
+Power and safety without compromises
+LabKey Extreme 25
+COMMAND DEVICES
+
+================= PAGE 26 =================
+Recessed QR Code Reader
+Suitable for high trafﬁc, it can handle up to 30 passages per minute and 
+works perfectly in complete darkness. For ﬂush-mounted indoor installations 
+or integration with turnstiles, the recessed QR Code version offers an 
+elegant and efﬁcient solution.
+A high-performance reader
+LK-EX-QI
+Passages per minute
+30
+Command device
+IP65 certiﬁed110x110x50mm
+Dimensions
+Solid
+case
+RJ45 + USB
+Communication
+Reading time
+0,3 sec.
+It detects the code up to
+25x25mm
+Guaranteed reading in
+complete darkness
+ smartphone
+Code reading from a Print code on
+paper
+26
+
+================= PAGE 27 =================
+Stainless steel vandal-proof keypad
+A 12-button stainless steel keypad with a robust and tactile feel. 
+The 4 T orx screws make it secure and resistant to extreme weather conditions. 
+It is also available for ﬂush-mounted screw attachment directly to the wall, 
+butin this case the cover provided is in carbon ﬁber or plexiglass. 
+The backlit keyboard communicates to the user whether access
+is denied or granted.
+Durability and usage in extreme conditions                                                                                                      
+LK-EX-TA
+keypad
+Stainless steel 12 backlit
+alphanumeric 
+keys
+5
+8
+1 2 3
+4 6
+7 9
+A 0 E
+.io
+LabKey Extreme 27
+COMMAND DEVICES
+Opening of the gate via
+customisable
+numerical codes
+Stand-by mode
+Energy saving
+RS-485
+Communication Command device
+IP65 certiﬁed100x100x27mm
+Dimensions
+Light point
+Visual Feedback 
+
+================= PAGE 28 =================
+28
+
+================= PAGE 29 =================
+Exporting the Immediate management
+contact list without connection
+Compatibility
+Clean contact
+Wireless connection 
+Radio ModuleLocal Wi-Fi 
+Connection
+RS-485
+Communication
+Exporting the
+key list
+Power supply
+12V
+R1 R2 R3 R4
+B   A   -   + 
+INPUT 12V
+ANTENNA
+No internet connection required, management also possible via local network
+It allows you to manage access to speciﬁc access points without requiring any internet 
+connection. You can connect up to 8 command devices through a 4-wire cable with 
+RS-485 protocol. Thanks to the radio module (433.92 MHz), it also manages the 
+wireless keypad.
+LabKey Stand Alone control unit
+LK-ST-CU2 /4
+COMMAND DEVICES
+CONNECT UP TO
+4ELECTRONIC DEVICES    
+MANAGE UP TO
+8
+Manage up to
+10.000 uniques codes
+CONTROL UNITS
+LabKey Control Units 29
+
+
+================= PAGE 30 =================
+30
+
+================= PAGE 31 =================
+Unlimited connectivity. Freedom at your ﬁngertips.
+LabKey Basic is the versatile control unit which adapts to your needs, allowing you to 
+pair it with up to 8 readers of your choice from all our ranges. Connection via Wi-Fi. 
+High performance enables management of up to 20,000 users. Power relays ensure 
+the opening of up to 4 separate access points.
+LabKey Basic control unit
+Compatibility
+Clean contact
+Wireless connection
+Radio ModuloWi-Fi network
+Connection
+RS-485
+Communication Avaiable
+Stand Alone
+R1 R2 R3 R4
+INPUT 12V
+LK-BS-CU2/4
+Functions guaranteed even 
+in the absence of connectivity
+Without internet
+Includes remote opening 
+on Android and iOS
+Mobile App Cloud Management
+The access to the online 
+management system 
+'Manage' is included
+For external systems, 
+e-commerce, software, etc..
+API activation Manage up to
+20.000 uniques 
+codes
+B   A   -   + 
+ANTENNA
+31
+CONTROL UNITS
+LabKey Control Units 
+Power Supply
+12V
+COMMAND DEVICES
+CONNECT UP TO
+4ELECTRONIC DEVICES    
+MANAGE UP TO
+8
+
+================= PAGE 32 =================
+32
+
+================= PAGE 33 =================
+Power and security without compromises.
+LabKey Pro control unit
+Internet connection via Wi-Fi or physical LAN cable (RJ45) for increased stability. 
+High performance allows management of up to 50,000 users and 8 command devices. 
+Power relays ensure the opening of up to 4 separate access points.
+R1 R2 R3 R4
+INPUT 12V
+LK-PR-CU2/4
+B   A   -   + 
+ANTENNA
+ETHERNET
+33
+CONTROL UNITS
+LabKey Control Units 
+Functions guaranteed even 
+in the absence of connectivity
+Without internet
+Includes remote opening 
+on Android and iOS
+Mobile App Cloud Management
+For external systems, 
+e-commerce, software, etc..
+API activation Manage up to
+50.000 uniques 
+codes
+Compatibility
+Clean contact
+Wireless connection
+Radio ModuloWi-Fi / LAN
+Connection
+RS-485
+Communication Avaiable
+Stand Alone
+Power Supply
+12V
+COMMAND DEVICES
+CONNECT UP TO
+4ELECTRONIC DEVICES    
+MANAGE UP TO
+8
+The access to the online 
+management system 
+'Manage' is included
+
+================= PAGE 34 =================
+34
+
+================= PAGE 35 =================
+Maximum freedom at your ﬁngertips
+LabKey LTE
+The control unit allows the management of up to 4 access points and cloud control via a 
+USB dongle with SIM card included in the package. You can choose between 5 or 10 
+years of connectivity and use antennas to boost the signal reception.
+LK-LT-CU2/4
+Included for 5 or 10 years, 
+depending on the chosen options
+Connectivity Manage up to
+5.000 uniques 
+codes
+R1 R2 R3 R4
+INPUT 12V
+B   A   -   + 
+ANTENNA
+USB
+35
+CONTROL UNITS
+LabKey Control Units 
+Functions guaranteed even 
+in the absence of connectivity
+Without internet
+Includes remote opening 
+on Android and iOS
+Mobile App Cloud Management
+Compatibility
+Clean contact
+Wireless connection
+Radio ModuloWi-Fi / LTE
+Connection
+RS-485
+Communication Avaiable
+Stand Alone
+Power Supply
+12V
+COMMAND DEVICES
+CONNECT UP TO
+4ELECTRONIC DEVICES    
+MANAGE UP TO
+8
+The access to the online 
+management system 
+'Manage' is included
+
+================= PAGE 36 =================
+[No text extracted from this page]
+
+================= PAGE 37 =================
+R1 R2 R3 R4
+INPUT 12V
+Rete Wi-Fi
+Connection 
+Ultimate freedom within reach
+LabKey Remote is the smart control unit that allows managing up to 4 gates through 
+remote opening via the LabKey mobile app. It is available in three versions: LabKey 
+Basic Remote, with Wi-Fi connection; LabKey PRO Remote, with connection via LAN 
+network; and LabKey LTE Remote, with connection via USB dongle equipped with an 
+integrated SIM card.
+LabKey Remote Control Unit
+LK-XX/REM-CU2/4
+LK-BS/REM-CU2/4
+LK-PR/REM-CU2/4 LK-L T/REM-CU2/4
+App Mobile Labkey
+Remote opening included 
+on Android and iOS
+Mobile AppCloud management
+Access to the Manage online 
+management system 
+is included
+For external systems, 
+e-commerce, software, etc.
+API Activation
+LabKey Control Units 37
+LTE
+Connection 
+LAN
+Connection 
+50.000 unique 
+codes
+Manage up to 
+CONTROL UNITS
+Compatibility
+Clean contact
+Power supply
+12V
+
+================= PAGE 38 =================
+COMMAND DEVICES
+CONNECT UP TO
+8ELECTRONIC DEVICES    
+MANAGE UP TO
+8
+PRO 8
+KIT ACCESS
+Reading time
+0,3 sec.
+Guaranteed reading in
+total darkness
+Compatible with
+mifare classic 1K cards
+Relè
+N/O (Normally Open)
+Relè
+N/O (Normally Open) or 
+N/C (Normally Closed)
+NFC 
+QR Code
+&
+*Relé 1
+*Relé 2
+*Relé 3
+*Relé 4
+*R5  10 
+*R1  *R2  *R3  *R4  
+*R6  10 
+*R7  10 
+*R8  10 
+LAN cable or Wi-Fi network
+Connection
+Enhanced power supply with
+DIN rail mount
+R1 R2 R3 R4R5 R6 R7 R8
+38
+72x72x25mm
+Dimensions
+Light point
+Visual feedback
+Compatible with
+Recessed glass
+
+================= PAGE 39 =================
+Power supply
+Enhanced DIN rail 
+It represents an innovative and ready-to-use solution for access control, offering a complete, secure, and intelligent system. 
+Thanks to this all-in-one package, there is no need to purchase additional components or face complex installations: 
+everything needed is included for efﬁcient and hassle-free integration.
+Kit Access Pro 8 
++ + + +
+KIT LABKEY
+Functions guaranteed 
+even without internet 
+connection
+Ofﬂine Operation
+Electric Strike
+T o electrify the 
+8 access points
+The LabKey ACCESS PRO 8 Kit is a complete, ready-to-use solution for the intelligent 
+management of 8 access points.
+LK-PR-CU4+LK-ACC/CU4+LK-ALIM/DIN1 LK-GL-NQ8 LK-ACC/STRIKE8 LK-GN-TS040 LK-HOST1
+Kit LabKey 39
+Wi-Fi / LAN
+Connection 
+LK-GL -NQ
+LK-PR-CU4+LK-ACC/CU4+LK-ALIM/DIN
+LK-GN- TS0
+LK-HOST
+LK-ACC/STRIKE
+Remote opening included 
+on Android and iOS
+Mobile AppCloud management
+Access to the Manage online 
+management system 
+is included
+For external systems, 
+e-commerce, software, etc.
+API Activation
+20.000 unique 
+codes
+Manage up to 
+RS-485
+Communication Avaiable
+Stand Alone
+Stand-by mode
+Energy saving
+
+
+================= PAGE 40 =================
+Radio Module:
+The connection between the LabKey Mini Radio Keypad
+ and the control unit is established via a 433.92MHz frequency.
+Connection of command devices
+Y ou can index the command with a dip switch and manage it from the software panel
+RS-485 (+ - A B )
+Connect the control devices through the removable terminal 
+of the central unit. The distance can extend beyond 100 
+meters, and both star and cascade connections are possible.
+40
+
+================= PAGE 41 =================
+Cloud connection modes
+Choose the best connection based on the infrastructure
+ available in your system
+LTE connection: 
+USB stick included, integrated SIM with 
+connectivity for up to 10 years.
+Wi-Fi 
+Connect your control unit to your 
+Wi-Fi network.
+Ethernet
+Connect the control unit to 
+the physical network using 
+a RJ45 plug.
+41
+TECHNICAL SPECIFICATIONS
+T echnical Speciﬁcations
+
+
+================= PAGE 42 =================
+Connection of electronic devices that you can control
+Through the clean contact, you are free without restrictions
+Power Supply
+The control unit requires a 12V/1A 
+power supply, which is included.
+Relay contact
+N/O  (normally open) with a 
+maximum of 10A.
+42
+
+
+================= PAGE 43 =================
+Through the LabKey Stand Alone App, you can manage access points, 
+users, and access rights with your smartphone connected to the same 
+local network as the command units.
+Stand Alone App
+A world of possibilities from your app
+Schermata Principale
+Stand AloneLABKEY-2BDE
+HOME 
+Lista chiavi  (5)
+Cerca chiave...
+Aggiungi ultima chiaveAggiorna
+196412354
+Opzioni aggiuntive
+LabKey Software 43
+SOFTWARE
+
+================= PAGE 44 =================
+44
+
+================= PAGE 45 =================
+Access management through LabKey Stand Alone is simple, immediate
+and can also be done through your facility's LAN network.
+Stand Alone Management
+Access the local network of the central unit with a PC, 
+tablet, or smartphone.
+Connect to the dedicated IP address to access the 
+management interface
+Create users and codes, activation is immediate
+Management
+Access to the panel
+Local Network
+Independent and ready to use
+128.X
+SOFTWARE
+45LabKey Software
+
+================= PAGE 46 =================
+Associate keys with the 
+people you want for the 
+time you desire.
+Cloud-based management software
+Add users and track 
+their daily access
+Generate new keys 
+and delete them 
+in case of theft or loss.
+Select which users are enabled 
+to use the mobile app for 
+remote access via smartphone
+Obtain useful statistical data 
+for your business and manage 
+automated operations.
+Management Panel
+LabKey
+46
+
+================= PAGE 47 =================
+SOFTWARE
+47LabKey Software
+
+================= PAGE 48 =================
+Management Panel
+Advanced functions
+Virtual room
+Discover in real-time how many people 
+are inside the room.
+Fast url
+Scenarios
+Send codes to users via SMS, which 
+automatically adds the access credentials 
+directly to the app.
+Create scenarios and manage automations. 
+For example, program the simultaneous 
+opening of multiple access points with a single
+command (e.g., external gate and 
+condominium door).
+Set a maximum limit of users who can access a 
+speciﬁc entry point and use the anti-passback feature 
+to intervene in case of multiple entries.
+Advanced alerts
+Update
+Use the software by accessing it through any 
+device. All updates are managed through 
+automatic processes without the need for 
+any technician intervention.
+Export time records
+Efﬁciently track your employees' working time,
+ensuring clear control over facility access and 
+precise attendance management.
+48
+
+================= PAGE 49 =================
+SOFTWARE
+Software LabKey 49
+
+================= PAGE 50 =================
+Access the gates via mobile application
+App Mobile
+Select the distance radius
+within which it is possible
+open the gate remotely
+via the app.
+Geolocalizzazione
+Set the door as a favourite
+that you access the most.
+Favorites
+Open from any distance.
+Remote opening
+For greater security, activate the
+biometric control to unlock
+the chosen gate via
+two-factor authentication.
+Biometric recognition
+50
+
+================= PAGE 51 =================
+API integrations
+We offer the possibility of activating an API layer to integrate our features
+with third-party software. Many of our customers use an API layer
+for different purposes, such as:
+self check-in and check-out;
+managing appointments for medical practices;
+coordination of gym and dance hall season ticket holders;
+managing employee hours within companies;
+integration with calendars for booking coworking rooms.
+provided according to
+customer needs
+SDK package
+for external systems,
+e-commerce,
+software, etc…
+API activation
+personalising alert, email, sms
+calls in case of event
+exceptional
+Script activation
+INTEGRATIONS
+LabKey integrations 51
+
+================= PAGE 52 =================
+Security and protection
+All data is protected by encryption and hosted on
+cloud to ensure the highest levels of security.
+The company is an autonomous system.
+Use of https protocols to communicate with the cloud:
+all codes are encrypted.
+Synchronization of the control unit with the cloud
+automatic. Access is guaranteed even in case of
+absence of connection, thanks to an internal cache
+in which all data is saved.
+Maximum levels of security with latest generation protocol.
+The relay, which communicates with the dry contact, is 
+present inside the control unit. In case of command 
+device burglary, it will not be possible to 
+access the gate. 
+Secure and encrypted browsing
+Hyper text transfer protocol over secure
+Data synchronization
+Access prohibited even with burglary
+52
+SECURITY
+LabKey Security
+
+================= PAGE 53 =================
+NFC Keys
+Additional relay plugin for control unit.
+Compatible with LK-PR-CU4 control unit.
+Plugin for input management extension.
+Compatible with LK-PR-CU4/CU2 control units.
+DIN version power supply (12V 4.5A) for control unit.
+Compatible with LK-PR-CU4 control unit.
+Anti-tamper enclosure for LabKey Mini and
+ LabKey Glass control models.
+For the LabKey Next, LabKey Mini, 
+and LabKey Glass models.
+Desktop NFC reader compatible 
+with PCs and LabKey software.
+Protective barrier Plugin for 4 Additional Relays
+Plugin for 4 GPIOs DIN power supply
+DIN
+Protective casin
+USB NFC Reader
+Keychain
+ Cards
+Bracelets
+ Stickers
+NFC KEYS & ACCESSORIES
+NFC Keys & Accessories 53
+Accessories
+
+
+================= PAGE 54 =================
+Partnership
+Based on the size and type of our partners, we can structure programs that speed up
+the go-to-market with a speciﬁc focus on the target audience.
+Assembly training, assistance, conﬁguration support for special installations.
+Supply chain guarantee, dedicated assistance, ﬂexibility
+    warehouse, exclusivity, assembly and assistance.
+Aesthetic and functional customization,
+     integration with existing systems.
+OEM PARTNERS
+CERTIFIED INSTALLERS
+API, SDK and dedicated script activation with custom plugins.
+DISTRIBUTORS, RETAILERS
+TECHNOLOGICAL PARTNERS
+54
+PARTNERSHIP
+Partnership LabKey 
+
+================= PAGE 55 =================
+Notes
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+.............................................................................................................................................................................................................................................................................
+
+================= PAGE 56 =================
+Padova | Italia
+info@labkey.io - www.labkey.io
++39 049 8078678 - +39 379 254 2339
+MUCH MORE THAN A "SIMPLE" KEY
+
