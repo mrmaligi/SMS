@@ -19,12 +19,24 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+/**
+ * Shared handler to adjust stock for a product and log the transaction.
+ * Supports both `id` and `productId` keys in the request body.
+ *
+ * @param request - Next.js incoming Request object
+ * @returns NextResponse with status and JSON payload
+ */
+async function handleStockAdjustment(request: Request) {
   try {
-    const { productId, quantityChange, type, notes, performedBy } = await request.json();
+    const body = await request.json();
+    const productId = body.productId || body.id;
+    const { quantityChange, type, notes, performedBy } = body;
+
+    console.log(`Processing stock adjustment for product ID: ${productId}, change: ${quantityChange}, type: ${type}`);
 
     if (!productId || typeof quantityChange !== 'number' || !type || !performedBy) {
-      return NextResponse.json({ success: false, error: 'Missing required parameters' }, { status: 400 });
+      console.warn('Stock adjustment rejected due to missing parameters:', { productId, quantityChange, type, performedBy });
+      return NextResponse.json({ success: false, error: 'Missing required parameters (id/productId, quantityChange, type, performedBy)' }, { status: 400 });
     }
 
     // 1. Retrieve the current stock
@@ -35,6 +47,7 @@ export async function POST(request: Request) {
       .single();
 
     if (fetchError || !product) {
+      console.error(`Fetch error or product not found for ID ${productId}:`, fetchError);
       return NextResponse.json({ success: false, error: 'Product not found in database' }, { status: 404 });
     }
 
@@ -47,6 +60,7 @@ export async function POST(request: Request) {
       .eq('id', productId);
 
     if (updateError) {
+      console.error(`Database update error for product ${productId}:`, updateError);
       throw updateError;
     }
 
@@ -63,12 +77,22 @@ export async function POST(request: Request) {
       });
 
     if (logError) {
+      console.error(`Database log transaction error for product ${productId}:`, logError);
       throw logError;
     }
 
+    console.log(`Stock updated successfully for product ${productId}. New stock: ${newStock}`);
     return NextResponse.json({ success: true, newStock });
   } catch (e: any) {
-    console.error('API products POST error:', e);
+    console.error('API products adjustment error:', e);
     return NextResponse.json({ success: false, error: e.message || 'Internal Server Error' }, { status: 500 });
   }
+}
+
+export async function POST(request: Request) {
+  return handleStockAdjustment(request);
+}
+
+export async function PATCH(request: Request) {
+  return handleStockAdjustment(request);
 }

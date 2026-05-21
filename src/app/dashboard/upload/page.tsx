@@ -1,27 +1,12 @@
-'use strict';
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  Upload,
-  FileText,
-  CheckCircle,
-  XCircle,
-  AlertTriangle,
-  ArrowRight,
-  RefreshCw,
-  Search,
-  Check,
-  ChevronDown,
-  Info,
-  Calendar,
-  Layers
-} from 'lucide-react';
-import { Product } from '@/lib/supabase';
+import { Upload, FileText, RefreshCw, CheckCircle, X, Search, ChevronDown, Check, AlertCircle, Loader2 } from 'lucide-react';
+import type { Product } from '@/lib/supabase';
 
 interface ParsedItem {
-  id: string; // client-side unique id
+  id: string;
   invoice_description: string;
   matched_sku: string | null;
   confidence: number;
@@ -30,506 +15,369 @@ interface ParsedItem {
 
 export default function UploadPage() {
   const router = useRouter();
-  
-  // Files and loading
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [isParsing, setIsParsing] = useState(false);
   const [parseError, setParseError] = useState('');
-
-  // Loaded catalog for manual mapping
   const [catalog, setCatalog] = useState<Product[]>([]);
-  const [loadingCatalog, setLoadingCatalog] = useState(true);
-
-  // Parsed invoice results
   const [invoiceLogId, setInvoiceLogId] = useState<string | null>(null);
   const [invoiceType, setInvoiceType] = useState<'purchase' | 'sale'>('sale');
   const [parsedItems, setParsedItems] = useState<ParsedItem[]>([]);
   const [reconciling, setReconciling] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
+  const [dropSearch, setDropSearch] = useState('');
 
-  // Active dropdown index for mapping overrides
-  const [activeDropdownIndex, setActiveDropdownIndex] = useState<number | null>(null);
-  const [dropdownSearch, setDropdownSearch] = useState('');
-  
-  // File input ref
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Fetch catalog products
   useEffect(() => {
-    async function loadCatalog() {
-      try {
-        const res = await fetch('/api/products');
-        const data = await res.json();
-        if (res.ok && data.success) {
-          setCatalog(data.products || []);
-        }
-      } catch (err) {
-        console.error('Failed to load products catalog', err);
-      } finally {
-        setLoadingCatalog(false);
-      }
-    }
-    loadCatalog();
+    fetch('/api/products').then(r => r.json()).then(d => {
+      if (d.success) setCatalog(d.products || []);
+    });
   }, []);
 
-  // Handle drag events
   const handleDrag = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
+    e.preventDefault(); e.stopPropagation();
+    setDragActive(e.type === 'dragenter' || e.type === 'dragover');
   };
 
-  // Handle drop event
   const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    e.preventDefault(); e.stopPropagation();
     setDragActive(false);
-    
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const droppedFile = e.dataTransfer.files[0];
-      validateAndSetFile(droppedFile);
-    }
+    if (e.dataTransfer.files[0]) validateAndSet(e.dataTransfer.files[0]);
   };
 
-  // Handle file select
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      validateAndSetFile(e.target.files[0]);
-    }
+  const validateAndSet = (f: File) => {
+    const allowed = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+    if (!allowed.includes(f.type)) { setParseError('Unsupported file. Please use PDF, PNG or JPEG.'); return; }
+    setFile(f); setParseError(''); setParsedItems([]); setInvoiceLogId(null);
   };
 
-  const validateAndSetFile = (selectedFile: File) => {
-    const fileType = selectedFile.type;
-    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
-    
-    if (!allowedTypes.includes(fileType)) {
-      setParseError('Unsupported file type. Please upload a PDF, PNG, or JPEG invoice.');
-      setFile(null);
-      return;
-    }
-
-    setFile(selectedFile);
-    setParseError('');
-    // Clear any previous results
-    setParsedItems([]);
-    setInvoiceLogId(null);
-  };
-
-  // Upload and parse using Gemini API
   const handleParse = async () => {
     if (!file) return;
-
-    setIsParsing(true);
-    setParseError('');
-    setParsedItems([]);
-
-    const formData = new FormData();
-    formData.append('file', file);
-
+    setIsParsing(true); setParseError(''); setParsedItems([]);
+    const form = new FormData();
+    form.append('file', file);
     try {
-      const response = await fetch('/api/invoice/parse', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
+      const res = await fetch('/api/invoice/parse', { method: 'POST', body: form });
+      const data = await res.json();
+      if (res.ok && data.success) {
         setInvoiceLogId(data.invoiceLogId);
         setInvoiceType(data.invoiceType);
-        
-        // Add unique client-side ID for list keys
-        const itemsWithId = (data.items || []).map((item: any, index: number) => ({
-          ...item,
-          id: `${index}-${Date.now()}`
-        }));
-        setParsedItems(itemsWithId);
+        setParsedItems((data.items || []).map((item: any, i: number) => ({ ...item, id: `${i}-${Date.now()}` })));
       } else {
-        setParseError(data.error || 'Failed to parse the invoice. Please check the API configuration.');
+        setParseError(data.error || 'Failed to parse invoice. Check your Gemini API key.');
       }
-    } catch (err: any) {
-      setParseError(err.message || 'An error occurred during invoice upload.');
+    } catch (e: any) {
+      setParseError(e.message || 'Upload error occurred.');
     } finally {
       setIsParsing(false);
     }
   };
 
-  // Apply final reconciliation changes to database
   const handleReconcile = async () => {
-    if (parsedItems.length === 0) return;
-    
+    if (!parsedItems.length) return;
     setReconciling(true);
     try {
-      const itemsToSubmit = parsedItems.map(item => ({
-        sku: item.matched_sku,
-        quantity: item.quantity,
-        invoice_description: item.invoice_description
-      }));
-
       const res = await fetch('/api/invoice/reconcile', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           invoiceLogId,
           invoiceType,
-          items: itemsToSubmit,
-          performedBy: 'Admin User'
-        })
+          items: parsedItems.map(i => ({ sku: i.matched_sku, quantity: i.quantity, invoice_description: i.invoice_description })),
+          performedBy: 'Admin',
+        }),
       });
-
       const data = await res.json();
       if (res.ok && data.success) {
         router.push('/dashboard');
         router.refresh();
       } else {
-        alert(data.error || 'Failed to reconcile invoice stock changes');
+        alert(data.error || 'Reconciliation failed.');
       }
-    } catch (err) {
-      console.error(err);
-      alert('Error reconciling invoice');
-    } finally {
-      setReconciling(false);
-    }
+    } catch { alert('Network error.'); }
+    finally { setReconciling(false); }
   };
 
-  // Helper: update item in state list
-  const updateParsedItem = (id: string, updates: Partial<ParsedItem>) => {
-    setParsedItems(prev => prev.map(item => item.id === id ? { ...item, ...updates } : item));
-  };
+  const updateItem = (id: string, updates: Partial<ParsedItem>) =>
+    setParsedItems(prev => prev.map(i => i.id === id ? { ...i, ...updates } : i));
+
+  const confColor = (c: number) =>
+    c < 0.5 ? '#E11D48' : c < 0.8 ? '#D97706' : '#16A34A';
 
   return (
-    <div className="space-y-8 animate-fade-in">
-      
-      {/* Title */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">AI Invoice Ingestion</h1>
-        <p className="text-zinc-400 text-sm mt-1">
-          Scan and reconcile stock adjustments directly from purchase or sales invoices.
-        </p>
+    <>
+      {/* Top Bar */}
+      <div className="top-bar">
+        <span className="top-bar-title">Parse Invoice</span>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        
-        {/* Left Section: File Upload Zone (Takes 1 Col) */}
-        <div className="space-y-4">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Upload className="h-5 w-5 text-zinc-400" />
-            <span>Select Invoice Document</span>
-          </h2>
+      <div className="page-body">
+        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: 20, alignItems: 'start' }}>
 
-          <div className="glass-panel rounded-3xl p-6 space-y-6">
-            
-            {/* Drag & Drop Card */}
-            <div
-              onDragEnter={handleDrag}
-              onDragOver={handleDrag}
-              onDragLeave={handleDrag}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-300 ${
-                dragActive
-                  ? 'border-blue-500 bg-blue-500/5'
-                  : file
-                    ? 'border-zinc-700 bg-zinc-900/30'
-                    : 'border-zinc-800 hover:border-zinc-700 bg-zinc-900/10'
-              }`}
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                className="hidden"
-                accept=".pdf,image/png,image/jpeg,image/jpg"
-                onChange={handleFileChange}
-              />
-              
-              <div className="p-4 bg-zinc-900 border border-zinc-850 rounded-2xl mb-4 text-zinc-400">
-                <FileText className={`h-8 w-8 ${file ? 'text-blue-400' : 'text-zinc-500'}`} />
+          {/* Left: Upload */}
+          <div>
+            <div className="card" style={{ padding: 20 }}>
+              <h2 style={{ fontSize: 14, fontWeight: 600, color: '#1A1D23', marginBottom: 16 }}>
+                Upload Invoice
+              </h2>
+
+              <div
+                className={`drop-zone${dragActive ? ' active' : ''}`}
+                onDragEnter={handleDrag} onDragOver={handleDrag}
+                onDragLeave={handleDrag} onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <input
+                  ref={fileInputRef} type="file"
+                  accept=".pdf,image/png,image/jpeg"
+                  style={{ display: 'none' }}
+                  onChange={e => e.target.files?.[0] && validateAndSet(e.target.files[0])}
+                />
+                <FileText size={28} color={file ? '#4F6EF7' : '#8B95A1'} style={{ margin: '0 auto 12px' }} />
+                {file ? (
+                  <>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: '#1A1D23', marginBottom: 3 }}>{file.name}</div>
+                    <div style={{ fontSize: 12, color: '#8B95A1' }}>{(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                  </>
+                ) : (
+                  <>
+                    <div style={{ fontSize: 13, fontWeight: 500, color: '#374151', marginBottom: 3 }}>
+                      Drop file here or click to browse
+                    </div>
+                    <div style={{ fontSize: 12, color: '#8B95A1' }}>PDF, PNG or JPEG</div>
+                  </>
+                )}
               </div>
 
-              {file ? (
-                <div className="space-y-1">
-                  <p className="text-sm font-semibold text-white truncate max-w-[200px]">{file.name}</p>
-                  <p className="text-xs text-zinc-500">{(file.size / (1024 * 1024)).toFixed(2)} MB</p>
+              {parseError && (
+                <div className="alert alert-error" style={{ marginTop: 12 }}>
+                  <AlertCircle size={14} style={{ flexShrink: 0, marginTop: 1 }} />
+                  <span>{parseError}</span>
                 </div>
-              ) : (
-                <div className="space-y-1">
-                  <p className="text-sm font-semibold text-zinc-300">Drag & drop your invoice file here</p>
-                  <p className="text-xs text-zinc-500">Supports PDF, PNG, and JPEG formats</p>
+              )}
+
+              {file && (
+                <button
+                  id="parse-invoice-btn"
+                  className="btn btn-primary"
+                  onClick={handleParse}
+                  disabled={isParsing}
+                  style={{ width: '100%', justifyContent: 'center', marginTop: 14 }}
+                >
+                  {isParsing ? <Loader2 size={14} className="spin" /> : <Search size={14} />}
+                  {isParsing ? 'Analysing...' : 'Extract & Match SKUs'}
+                </button>
+              )}
+
+              {/* Legend */}
+              <div style={{ marginTop: 20, padding: '14px', background: '#FAFAFA', borderRadius: 8, border: '1px solid #EAECF0' }}>
+                <div style={{ fontSize: 11.5, fontWeight: 600, color: '#8B95A1', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.4px' }}>
+                  Confidence Guide
+                </div>
+                {[
+                  { color: '#16A34A', label: '≥80% — High match' },
+                  { color: '#D97706', label: '50–79% — Review recommended' },
+                  { color: '#E11D48', label: '<50% — Manually verify' },
+                ].map(({ color, label }) => (
+                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
+                    <span style={{ fontSize: 12, color: '#5C6370' }}>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Reconciliation Board */}
+          <div className="card" style={{ padding: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+              <h2 style={{ fontSize: 14, fontWeight: 600, color: '#1A1D23' }}>
+                Reconciliation Board
+              </h2>
+              {parsedItems.length > 0 && (
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <span style={{ fontSize: 12, color: '#8B95A1' }}>Invoice type:</span>
+                  <select
+                    className="filter-select"
+                    style={{ minWidth: 0, fontSize: 12 }}
+                    value={invoiceType}
+                    onChange={e => setInvoiceType(e.target.value as 'purchase' | 'sale')}
+                  >
+                    <option value="sale">Sale (Stock Out)</option>
+                    <option value="purchase">Purchase (Stock In)</option>
+                  </select>
                 </div>
               )}
             </div>
 
-            {/* Error alerts */}
-            {parseError && (
-              <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs flex items-start gap-2.5">
-                <XCircle className="h-4.5 w-4.5 shrink-0 mt-0.5" />
-                <span>{parseError}</span>
-              </div>
-            )}
-
-            {/* Parse buttons */}
-            {file && (
-              <button
-                id="parse-invoice-btn"
-                onClick={handleParse}
-                disabled={isParsing}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 transition-all shadow-[0_4px_20px_rgba(37,99,235,0.2)]"
-              >
-                {isParsing ? (
-                  <>
-                    <RefreshCw className="h-4 w-4 animate-spin" />
-                    <span>Analyzing Invoices (OCR + Match)...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Extract & Match SKUs</span>
-                  </>
-                )}
-              </button>
-            )}
-
-          </div>
-        </div>
-
-        {/* Right Section: Parsed Items Reconciliation Grid (Takes 2 Cols) */}
-        <div className="xl:col-span-2 space-y-4">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Layers className="h-5 w-5 text-zinc-400" />
-            <span>Reconciliation & Match verification</span>
-          </h2>
-
-          <div className="glass-panel rounded-3xl p-6 min-h-[400px] flex flex-col justify-between shadow-md">
-            
-            {/* Empty state */}
-            {parsedItems.length === 0 && !isParsing && (
-              <div className="flex-1 flex flex-col items-center justify-center text-zinc-500 p-8 text-center my-auto">
-                <FileText className="h-12 w-12 text-zinc-700 mb-3" />
-                <p className="text-sm font-semibold text-zinc-400">Reconciliation Board is empty</p>
-                <p className="text-xs text-zinc-500 max-w-sm mt-1">
-                  Upload an invoice and click "Extract & Match SKUs" to see side-by-side parsing verification.
-                </p>
-              </div>
-            )}
-
-            {/* Loading skeleton state */}
             {isParsing && (
-              <div className="flex-1 flex flex-col items-center justify-center p-8 text-center my-auto space-y-4">
-                <RefreshCw className="h-8 w-8 text-blue-500 animate-spin" />
-                <div className="space-y-1">
-                  <p className="text-sm font-semibold text-zinc-300">Gemini AI is reading the invoice...</p>
-                  <p className="text-xs text-zinc-500 max-w-sm mx-auto">
-                    Processing layout structure, reading lines, and matching names to the SKU database.
-                  </p>
+              <div style={{ padding: '60px 20px', textAlign: 'center', color: '#8B95A1' }}>
+                <Loader2 size={28} className="spin" style={{ margin: '0 auto 12px' }} />
+                <div style={{ fontSize: 13, fontWeight: 500, color: '#374151' }}>
+                  Gemini is reading your invoice...
                 </div>
+                <div style={{ fontSize: 12, marginTop: 4 }}>OCR + SKU matching in progress</div>
               </div>
             )}
 
-            {/* Results Review Dashboard */}
+            {!isParsing && parsedItems.length === 0 && (
+              <div style={{ padding: '60px 20px', textAlign: 'center', color: '#8B95A1' }}>
+                <Upload size={32} style={{ margin: '0 auto 12px', opacity: 0.3 }} />
+                <div style={{ fontSize: 13 }}>Upload and parse an invoice to see matched line items here.</div>
+              </div>
+            )}
+
             {parsedItems.length > 0 && !isParsing && (
-              <div className="space-y-6 flex-1 flex flex-col justify-between">
-                
-                {/* Header configuration */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-zinc-900/40 border border-zinc-850 rounded-2xl gap-3">
-                  <div>
-                    <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Invoice Category Type</div>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-sm font-bold text-white uppercase tracking-tight">
-                        {invoiceType === 'purchase' ? 'Stock-In / Purchase (Increases Stock)' : 'Stock-Out / Sale (Decreases Stock)'}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setInvoiceType(prev => prev === 'purchase' ? 'sale' : 'purchase')}
-                    className="px-4 py-2 bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
-                  >
-                    Change to {invoiceType === 'purchase' ? 'Sale' : 'Purchase'}
-                  </button>
-                </div>
-
-                {/* Grid Item mapping table */}
-                <div className="space-y-4 flex-1">
-                  <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Line Items Mapping</div>
-                  
-                  <div className="space-y-3">
-                    {parsedItems.map((item, idx) => {
-                      const matchedProduct = catalog.find(p => p.sku === item.matched_sku);
-                      
-                      // Confidence colors
-                      let confColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/10';
-                      if (item.confidence < 0.5) {
-                        confColor = 'bg-red-500/10 text-red-400 border-red-500/10';
-                      } else if (item.confidence < 0.8) {
-                        confColor = 'bg-amber-500/10 text-amber-400 border-amber-500/10';
-                      }
-
-                      // Handle overrides dropdown search
-                      const filteredCatalog = catalog.filter(p => 
-                        p.sku.toLowerCase().includes(dropdownSearch.toLowerCase()) ||
-                        p.name.toLowerCase().includes(dropdownSearch.toLowerCase())
-                      );
-
-                      return (
-                        <div key={item.id} className="grid grid-cols-1 md:grid-cols-12 items-center gap-4 p-4 bg-zinc-900/35 border border-zinc-850 hover:border-zinc-800 rounded-2xl transition-all relative">
-                          
-                          {/* Invoice Raw Item Info */}
-                          <div className="md:col-span-4 space-y-1">
-                            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Raw Description</div>
-                            <div className="text-xs font-semibold text-white leading-snug line-clamp-2" title={item.invoice_description}>
-                              {item.invoice_description}
-                            </div>
-                          </div>
-
-                          {/* Matching SKU Catalog dropdown */}
-                          <div className="md:col-span-5 space-y-1 relative">
-                            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Mapped Catalog SKU</div>
-                            
-                            {/* Dropdown toggle */}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (activeDropdownIndex === idx) {
-                                  setActiveDropdownIndex(null);
-                                } else {
-                                  setActiveDropdownIndex(idx);
-                                  setDropdownSearch('');
-                                }
-                              }}
-                              className="w-full flex items-center justify-between px-3 py-2 bg-zinc-950 border border-zinc-800 hover:border-zinc-700 rounded-xl text-xs text-white outline-none cursor-pointer transition-all"
-                            >
-                              <span className="truncate font-medium text-left">
-                                {matchedProduct ? (
-                                  <span className="text-blue-400 font-mono font-semibold">[{matchedProduct.sku}] <span className="text-zinc-300 font-sans font-medium">{matchedProduct.name}</span></span>
-                                ) : (
-                                  <span className="text-zinc-500 italic">Excluded from stock (No Match)</span>
-                                )}
+              <>
+                <div style={{ overflowX: 'auto' }}>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style={{ width: '35%' }}>Invoice Line Description</th>
+                        <th>Matched SKU</th>
+                        <th style={{ textAlign: 'center', width: 80 }}>Conf.</th>
+                        <th style={{ textAlign: 'center', width: 80 }}>Qty</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {parsedItems.map((item, idx) => {
+                        const matched = catalog.find(p => p.sku === item.matched_sku);
+                        const filtered = catalog.filter(p =>
+                          p.sku.toLowerCase().includes(dropSearch.toLowerCase()) ||
+                          p.name.toLowerCase().includes(dropSearch.toLowerCase())
+                        );
+                        return (
+                          <tr key={item.id}>
+                            {/* Raw description */}
+                            <td>
+                              <span style={{ fontSize: 12.5, color: '#374151' }} title={item.invoice_description}>
+                                {item.invoice_description}
                               </span>
-                              <ChevronDown className="h-4 w-4 text-zinc-500 ml-1.5 shrink-0" />
-                            </button>
+                            </td>
 
-                            {/* Dropdown Menu overlay */}
-                            {activeDropdownIndex === idx && (
-                              <div className="absolute left-0 right-0 mt-1 bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl z-50 p-2 max-h-60 overflow-hidden flex flex-col">
-                                <div className="relative mb-2">
-                                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-500" />
-                                  <input
-                                    type="text"
-                                    placeholder="Search catalog SKU..."
-                                    value={dropdownSearch}
-                                    onChange={(e) => setDropdownSearch(e.target.value)}
-                                    className="w-full pl-8 pr-3 py-1.5 bg-zinc-950 border border-zinc-800 focus:border-blue-500 rounded-lg text-xs text-white outline-none"
-                                  />
-                                </div>
-                                
-                                <div className="flex-1 overflow-y-auto space-y-0.5">
-                                  {/* None/Exclude option */}
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      updateParsedItem(item.id, { matched_sku: null, confidence: 1.0 });
-                                      setActiveDropdownIndex(null);
-                                    }}
-                                    className="w-full flex items-center justify-between px-2 py-2 rounded-lg text-left text-xs hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 cursor-pointer"
-                                  >
-                                    <span className="italic">Exclude this item from stock update</span>
-                                    {item.matched_sku === null && <Check className="h-3.5 w-3.5 text-blue-500" />}
-                                  </button>
+                            {/* SKU Dropdown */}
+                            <td style={{ position: 'relative' }}>
+                              <button
+                                onClick={() => { setActiveDropdown(activeDropdown === idx ? null : idx); setDropSearch(''); }}
+                                style={{
+                                  width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                  padding: '6px 10px', border: '1px solid #EAECF0', borderRadius: 6,
+                                  background: '#FAFAFA', cursor: 'pointer', fontSize: 12.5, color: '#1A1D23',
+                                  gap: 6
+                                }}
+                              >
+                                <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'left' }}>
+                                  {matched
+                                    ? <><span style={{ color: '#4F6EF7', fontFamily: 'monospace', fontWeight: 600 }}>{matched.sku}</span> {matched.name}</>
+                                    : <span style={{ color: '#8B95A1', fontStyle: 'italic' }}>Exclude from update</span>
+                                  }
+                                </span>
+                                <ChevronDown size={12} style={{ flexShrink: 0, color: '#8B95A1' }} />
+                              </button>
 
-                                  {filteredCatalog.map(p => (
+                              {activeDropdown === idx && (
+                                <div style={{
+                                  position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 100,
+                                  background: '#fff', border: '1px solid #EAECF0', borderRadius: 8,
+                                  boxShadow: '0 8px 24px rgba(0,0,0,0.1)', padding: 8,
+                                  maxHeight: 240, overflow: 'hidden', display: 'flex', flexDirection: 'column', marginTop: 2
+                                }}>
+                                  <div style={{ position: 'relative', marginBottom: 6 }}>
+                                    <Search size={12} style={{ position: 'absolute', left: 8, top: '50%', transform: 'translateY(-50%)', color: '#8B95A1' }} />
+                                    <input
+                                      autoFocus
+                                      value={dropSearch}
+                                      onChange={e => setDropSearch(e.target.value)}
+                                      placeholder="Search..."
+                                      style={{ width: '100%', paddingLeft: 26, padding: '5px 8px 5px 26px', border: '1px solid #EAECF0', borderRadius: 6, fontSize: 12, outline: 'none' }}
+                                    />
+                                  </div>
+                                  <div style={{ overflowY: 'auto' }}>
                                     <button
-                                      key={p.id}
-                                      type="button"
-                                      onClick={() => {
-                                        updateParsedItem(item.id, { matched_sku: p.sku, confidence: 1.0 });
-                                        setActiveDropdownIndex(null);
-                                      }}
-                                      className="w-full flex items-center justify-between px-2 py-2 rounded-lg text-left text-xs hover:bg-zinc-800 text-white cursor-pointer"
+                                      onClick={() => { updateItem(item.id, { matched_sku: null }); setActiveDropdown(null); }}
+                                      style={{ width: '100%', textAlign: 'left', padding: '6px 8px', fontSize: 12, borderRadius: 6, cursor: 'pointer', border: 'none', background: 'none', color: '#8B95A1', display: 'flex', justifyContent: 'space-between' }}
                                     >
-                                      <span className="truncate font-mono"><span className="text-blue-400 font-semibold">{p.sku}</span> - <span className="text-zinc-300 font-sans font-medium">{p.name}</span></span>
-                                      {item.matched_sku === p.sku && <Check className="h-3.5 w-3.5 text-blue-500 shrink-0 ml-1" />}
+                                      <span style={{ fontStyle: 'italic' }}>Exclude this line</span>
+                                      {!item.matched_sku && <Check size={12} style={{ color: '#4F6EF7' }} />}
                                     </button>
-                                  ))}
-                                  {filteredCatalog.length === 0 && (
-                                    <div className="text-center py-4 text-xs text-zinc-600">No SKU matched search.</div>
-                                  )}
+                                    {filtered.map(p => (
+                                      <button
+                                        key={p.id}
+                                        onClick={() => { updateItem(item.id, { matched_sku: p.sku, confidence: 1 }); setActiveDropdown(null); }}
+                                        style={{ width: '100%', textAlign: 'left', padding: '6px 8px', fontSize: 12, borderRadius: 6, cursor: 'pointer', border: 'none', background: 'none', color: '#1A1D23', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                                        onMouseEnter={e => (e.currentTarget.style.background = '#F5F6FA')}
+                                        onMouseLeave={e => (e.currentTarget.style.background = 'none')}
+                                      >
+                                        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                                          <span style={{ color: '#4F6EF7', fontFamily: 'monospace', fontWeight: 600 }}>{p.sku}</span> — {p.name}
+                                        </span>
+                                        {item.matched_sku === p.sku && <Check size={12} style={{ color: '#4F6EF7', flexShrink: 0 }} />}
+                                      </button>
+                                    ))}
+                                    {filtered.length === 0 && (
+                                      <div style={{ textAlign: 'center', padding: '12px 0', fontSize: 12, color: '#8B95A1' }}>No results</div>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            )}
+                              )}
+                            </td>
 
-                          </div>
-
-                          {/* Confidence score */}
-                          <div className="md:col-span-1.5 space-y-1">
-                            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Confidence</div>
-                            <div>
-                              <span className={`inline-flex px-2 py-0.5 border rounded-md text-[10px] font-bold ${confColor}`}>
-                                {(item.confidence * 100).toFixed(0)}%
+                            {/* Confidence */}
+                            <td style={{ textAlign: 'center' }}>
+                              <span style={{
+                                fontSize: 12, fontWeight: 700,
+                                color: confColor(item.confidence),
+                                background: `${confColor(item.confidence)}18`,
+                                padding: '2px 7px', borderRadius: 20
+                              }}>
+                                {Math.round(item.confidence * 100)}%
                               </span>
-                            </div>
-                          </div>
+                            </td>
 
-                          {/* Quantity */}
-                          <div className="md:col-span-1.5 space-y-1">
-                            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Quantity</div>
-                            <input
-                              type="number"
-                              min={1}
-                              value={item.quantity}
-                              onChange={(e) => updateParsedItem(item.id, { quantity: Math.max(1, parseInt(e.target.value) || 1) })}
-                              className="w-full text-center px-2 py-1.5 bg-zinc-950 border border-zinc-800 rounded-xl text-xs text-white outline-none focus:border-blue-500"
-                            />
-                          </div>
-
-                        </div>
-                      );
-                    })}
-                  </div>
+                            {/* Qty */}
+                            <td style={{ textAlign: 'center' }}>
+                              <input
+                                type="number"
+                                min={1}
+                                value={item.quantity}
+                                onChange={e => updateItem(item.id, { quantity: Math.max(1, parseInt(e.target.value) || 1) })}
+                                style={{
+                                  width: 60, textAlign: 'center', padding: '5px 6px',
+                                  border: '1px solid #EAECF0', borderRadius: 6, fontSize: 13,
+                                  fontWeight: 600, outline: 'none'
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
 
-                {/* Action triggers */}
-                <div className="flex gap-4 pt-6 border-t border-zinc-850 mt-6">
+                {/* Actions */}
+                <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 20, paddingTop: 16, borderTop: '1px solid #EAECF0' }}>
                   <button
-                    type="button"
-                    onClick={() => {
-                      setParsedItems([]);
-                      setFile(null);
-                    }}
-                    className="px-6 py-3.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-xl text-sm font-semibold border border-zinc-850 cursor-pointer transition-all"
+                    className="btn btn-secondary"
+                    onClick={() => { setParsedItems([]); setFile(null); }}
                   >
-                    Clear Results
+                    Clear
                   </button>
                   <button
                     id="submit-reconciliation-btn"
+                    className="btn btn-primary"
                     onClick={handleReconcile}
                     disabled={reconciling}
-                    className="flex-1 py-3.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white rounded-xl text-sm font-semibold cursor-pointer shadow-[0_4px_20px_rgba(37,99,235,0.25)] hover:shadow-[0_4px_20px_rgba(37,99,235,0.45)] transition-all flex items-center justify-center gap-2"
                   >
-                    {reconciling ? (
-                      <>
-                        <RefreshCw className="h-4.5 w-4.5 animate-spin" />
-                        <span>Reconciling & Writing stock adjustments...</span>
-                      </>
-                    ) : (
-                      <>
-                        <CheckCircle className="h-4.5 w-4.5" />
-                        <span>Approve and Apply Stock Changes</span>
-                      </>
-                    )}
+                    {reconciling ? <Loader2 size={14} className="spin" /> : <CheckCircle size={14} />}
+                    {reconciling ? 'Applying...' : `Apply ${invoiceType === 'purchase' ? 'Stock In' : 'Stock Out'}`}
                   </button>
                 </div>
-
-              </div>
+              </>
             )}
-
           </div>
         </div>
-
       </div>
-
-    </div>
+    </>
   );
 }

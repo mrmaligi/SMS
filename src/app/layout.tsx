@@ -1,33 +1,25 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
   subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'LabKey | Stock Management System',
-  description: 'AI-driven, real-time inventory tracking and automated invoice parser for LabKey Access Control Systems.',
+  title: 'LabKey | Stock Management',
+  description: 'Real-time inventory tracking and AI invoice parsing for LabKey Access Control Systems.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full dark">
+    <html lang="en" className="h-full">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans h-full bg-zinc-950 text-zinc-100 antialiased flex flex-col`}>
+      <body className={`${inter.className} h-full`}>
         {children}
       </body>
     </html>
